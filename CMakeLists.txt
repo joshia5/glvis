@@ -195,7 +195,9 @@ if (NOT EMSCRIPTEN)
   #endif()
 
   list(APPEND GLEW_INCLUDE_DIRS "/users/joshia5/.conda/envs/20230305/include/GL")
-  list(APPEND GLEW_LIBRARIES "/users/joshia5/.conda/envs/20230305/lib -Wl,-rpath,/users/joshia5/.conda/envs/20230305/lib -Wl,--enable-new-tags -lGLEW")
+  message("all libs ${_glvis_libraries}")
+  #list(APPEND GLEW_LIBRARIES "/users/joshia5/.conda/envs/20230305/lib -Wl,-rpath,/users/joshia5/.conda/envs/20230305/lib -Wl,--enable-new-tags -lGLEW")
+  list(APPEND GLEW_LIBRARIES "/users/joshia5/.conda/envs/20230305/lib/libGLEW.so")
   list(APPEND _glvis_include_dirs "${GLEW_INCLUDE_DIRS}")
   list(APPEND _glvis_libraries "${GLEW_LIBRARIES}")
 
