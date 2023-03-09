@@ -159,48 +159,10 @@ if (NOT EMSCRIPTEN)
   message(STATUS "SDL2 found: ${SDL2_LIBRARIES}")
   message(STATUS "SDL2_INCLUDE_DIRS = ${SDL2_INCLUDE_DIRS}")
 
-  # Find GLEW
-  # GLEW search path can be set using CMAKE_PREFIX_PATH
-  #list(APPEND CMAKE_PREFIX_PATH "../glew")
-  #find_package(GLEW REQUIRED)
-  #list(APPEND _glvis_libraries GLEW::GLEW)
-
-  #set(GLEW_DIR "/users/joshia5/.conda/envs/20230305")
-  #find_package(GLEW QUIET HINTS ${GLEW_DIR})
-  #if (TARGET GLEW::GLEW)
-    #message("target glew found")
-    #endif()
-  #if (NOT GLEW_INCLUDE_DIRS)
-    #find_path(GLEW_INCLUDE_DIRS "GL/glew.h"
-      #HINTS ${GLEW_DIR} ENV GLEW_DIR
-      #PATH_SUFFIXES "include"
-      #DOC "GLEW include path.")
-    #find_library(GLEW_LIBRARIES "GLEW"
-      #HINTS ${GLEW_DIR} ENV GLEW_DIR
-      #PATH_SUFFIXES "lib"
-      #  DOC "GLEW library.")
-    #if (NOT GLEW_LIBRARIES)
-      #message(FATAL_ERROR "GLEW library not found. Please check GLEW_DIR.")
-      #endif()
-    #if (NOT GLEW_INCLUDE_DIRS)
-      #message(FATAL_ERROR "GLEW INCLUDE not found. Please check GLEW_DIR.")
-      #endif()
-    #list(APPEND _glvis_include_dirs "${GLEW_INCLUDE_DIRS}")
-    #list(APPEND _glvis_libraries "${GLEW_LIBRARIES}")
-    #endif()
-
-  #if (TARGET GLEW::GLEW)
-  #list(APPEND _glvis_libraries GLEW::GLEW)
-  #message("if GLEW ${GLEW_DIR}")
-  #endif()
-
   list(APPEND GLEW_INCLUDE_DIRS "/users/joshia5/.conda/envs/20230305/include/GL")
-  message("all libs ${_glvis_libraries}")
-  #list(APPEND GLEW_LIBRARIES "/users/joshia5/.conda/envs/20230305/lib -Wl,-rpath,/users/joshia5/.conda/envs/20230305/lib -Wl,--enable-new-tags -lGLEW")
   list(APPEND GLEW_LIBRARIES "/users/joshia5/.conda/envs/20230305/lib/libGLEW.so")
   list(APPEND _glvis_include_dirs "${GLEW_INCLUDE_DIRS}")
   list(APPEND _glvis_libraries "${GLEW_LIBRARIES}")
-
   message(STATUS "GLEW_LIBRARIES = ${GLEW_LIBRARIES}")
   message(STATUS "GLEW_INCLUDE_DIRS = ${GLEW_INCLUDE_DIRS}")
 
