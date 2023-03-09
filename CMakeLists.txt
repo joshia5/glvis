@@ -119,12 +119,15 @@ if (NOT EMSCRIPTEN)
 
   # Find 'SDL2' which is not part of the CMake standard modules
   list(APPEND SDL2_DIR "../SDL2")
+  message("sdl2 ${SDL2_DIR}")
   set(SDL2_DIR_SAVE ${SDL2_DIR})
+  message("sdl inc ${SDL2_INCLUDE_DIRS} SDL LIB ${SDL2_LIBRARIES}")
   find_package(SDL2 QUIET HINTS ${SDL2_DIR})
   # The SDL2 target 'SDL2::SDL2' is not always defined, so instead we use
   # directly 'SDL2_INCLUDE_DIRS' and 'SDL2_LIBRARIES'.
   if (TARGET SDL2::SDL2)
     list(APPEND _glvis_libraries SDL2::SDL2)
+    message("if sdl2 ${SDL2_DIR}")
   elseif (SDL2_INCLUDE_DIRS AND SDL2_LIBRARIES)
     # SDL2_INCLUDE_DIRS is defined with 'SDL2' at the end of the path we need to
     # strip that.
@@ -158,9 +161,46 @@ if (NOT EMSCRIPTEN)
 
   # Find GLEW
   # GLEW search path can be set using CMAKE_PREFIX_PATH
-  list(APPEND CMAKE_PREFIX_PATH "../glew")
-  find_package(GLEW REQUIRED)
-  list(APPEND _glvis_libraries GLEW::GLEW)
+  #list(APPEND CMAKE_PREFIX_PATH "../glew")
+  #find_package(GLEW REQUIRED)
+  #list(APPEND _glvis_libraries GLEW::GLEW)
+
+  #set(GLEW_DIR "/users/joshia5/.conda/envs/20230305")
+  #find_package(GLEW QUIET HINTS ${GLEW_DIR})
+  #if (TARGET GLEW::GLEW)
+    #message("target glew found")
+    #endif()
+  #if (NOT GLEW_INCLUDE_DIRS)
+    #find_path(GLEW_INCLUDE_DIRS "GL/glew.h"
+      #HINTS ${GLEW_DIR} ENV GLEW_DIR
+      #PATH_SUFFIXES "include"
+      #DOC "GLEW include path.")
+    #find_library(GLEW_LIBRARIES "GLEW"
+      #HINTS ${GLEW_DIR} ENV GLEW_DIR
+      #PATH_SUFFIXES "lib"
+      #  DOC "GLEW library.")
+    #if (NOT GLEW_LIBRARIES)
+      #message(FATAL_ERROR "GLEW library not found. Please check GLEW_DIR.")
+      #endif()
+    #if (NOT GLEW_INCLUDE_DIRS)
+      #message(FATAL_ERROR "GLEW INCLUDE not found. Please check GLEW_DIR.")
+      #endif()
+    #list(APPEND _glvis_include_dirs "${GLEW_INCLUDE_DIRS}")
+    #list(APPEND _glvis_libraries "${GLEW_LIBRARIES}")
+    #endif()
+
+  #if (TARGET GLEW::GLEW)
+  #list(APPEND _glvis_libraries GLEW::GLEW)
+  #message("if GLEW ${GLEW_DIR}")
+  #endif()
+
+  list(APPEND GLEW_INCLUDE_DIRS "/users/joshia5/.conda/envs/20230305/include/GL")
+  list(APPEND GLEW_LIBRARIES "/users/joshia5/.conda/envs/20230305/lib -Wl,-rpath,/users/joshia5/.conda/envs/20230305/lib -Wl,--enable-new-tags -lGLEW")
+  list(APPEND _glvis_include_dirs "${GLEW_INCLUDE_DIRS}")
+  list(APPEND _glvis_libraries "${GLEW_LIBRARIES}")
+
+  message(STATUS "GLEW_LIBRARIES = ${GLEW_LIBRARIES}")
+  message(STATUS "GLEW_INCLUDE_DIRS = ${GLEW_INCLUDE_DIRS}")
 
   # Find 'glm' which is not part of the CMake standard modules
   list(APPEND GLM_DIR "../glm")
