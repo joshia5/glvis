@@ -1545,6 +1545,7 @@ int ReadParMeshAndGridFunction(int np, const char *mesh_prefix,
                                const char *sol_prefix,
                                StreamState& state)
 {
+   printf("reading parmesh with nparts %d\n", np);
    state.mesh = NULL;
 
    // are the solutions bundled together with the mesh files?
@@ -1616,7 +1617,15 @@ int ReadParMeshAndGridFunction(int np, const char *mesh_prefix,
    if (!read_err)
    {
       // create the combined mesh and gf
-      state.mesh.reset(new Mesh(mesh_array, np));
+      Mesh *sermesh = new Mesh (mesh_array, np);
+      state.mesh.reset(sermesh);
+      ofstream mesh_ofs("ser.mesh");
+      mesh_ofs.precision(8);
+      sermesh->Print(mesh_ofs);
+      printf("written ser mesh\n");
+      delete sermesh;
+      printf("deleted ser mesh\n");
+      //state.mesh.reset(new Mesh(mesh_array, np));
       if (sol_prefix)
       {
          state.grid_f.reset(new GridFunction(state.mesh.get(), gf_array, np));
@@ -1628,6 +1637,7 @@ int ReadParMeshAndGridFunction(int np, const char *mesh_prefix,
       delete gf_array[np-1-p];
       delete mesh_array[np-1-p];
    }
+   printf("completed reading parmesh\n");
 
    return read_err;
 }

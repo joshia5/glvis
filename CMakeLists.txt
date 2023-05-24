@@ -159,7 +159,7 @@ if (NOT EMSCRIPTEN)
   message(STATUS "SDL2 found: ${SDL2_LIBRARIES}")
   message(STATUS "SDL2_INCLUDE_DIRS = ${SDL2_INCLUDE_DIRS}")
 
-  list(APPEND GLEW_INCLUDE_DIRS "/users/joshia5/.conda/envs/20230305/include/GL")
+  list(APPEND GLEW_INCLUDE_DIRS "/users/joshia5/.conda/envs/20230305/include")
   list(APPEND GLEW_LIBRARIES "/users/joshia5/.conda/envs/20230305/lib/libGLEW.so")
   list(APPEND _glvis_include_dirs "${GLEW_INCLUDE_DIRS}")
   list(APPEND _glvis_libraries "${GLEW_LIBRARIES}")
