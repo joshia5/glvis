@@ -1618,6 +1618,9 @@ int ReadParMeshAndGridFunction(int np, const char *mesh_prefix,
    {
       // create the combined mesh and gf
       state.mesh.reset(new Mesh(mesh_array, np));
+      ofstream ofs("ser.mesh");
+      ofs.precision(8);
+      state.mesh->Print(ofs);
       if (sol_prefix)
       {
          state.grid_f.reset(new GridFunction(state.mesh.get(), gf_array, np));
