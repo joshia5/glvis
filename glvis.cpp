@@ -1617,15 +1617,7 @@ int ReadParMeshAndGridFunction(int np, const char *mesh_prefix,
    if (!read_err)
    {
       // create the combined mesh and gf
-      Mesh *sermesh = new Mesh (mesh_array, np);
-      state.mesh.reset(sermesh);
-      ofstream mesh_ofs("ser.mesh");
-      mesh_ofs.precision(8);
-      sermesh->Print(mesh_ofs);
-      printf("written ser mesh\n");
-      delete sermesh;
-      printf("deleted ser mesh\n");
-      //state.mesh.reset(new Mesh(mesh_array, np));
+      state.mesh.reset(new Mesh(mesh_array, np));
       if (sol_prefix)
       {
          state.grid_f.reset(new GridFunction(state.mesh.get(), gf_array, np));
